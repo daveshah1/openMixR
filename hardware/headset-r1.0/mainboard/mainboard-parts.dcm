@@ -1,0 +1,11 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP C_Small2
+D Unpolarized capacitor
+$ENDCMP
+#
+$CMP R_Small_x4
+D Resistor
+$ENDCMP
+#
+#End Doc Library

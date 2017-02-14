@@ -1,0 +1,570 @@
+EESchema Schematic File Version 2
+LIBS:mainboard-rescue
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:mainboard-parts
+LIBS:old-parts
+LIBS:fmcboard
+LIBS:customconn
+LIBS:mainboard-cache
+EELAYER 25 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 9 19
+Title "openMixR 4k Headset Mainboard"
+Date "2017-02-14"
+Rev "1.0"
+Comp "David Shah"
+Comment1 "CONFIDENTIAL"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L A64 U501
+U 5 1 57CDBBB3
+P 4950 7500
+F 0 "U501" H 4950 7450 60  0000 C CNN
+F 1 "A64" H 4950 7550 60  0000 C CNN
+F 2 "Custom Parts:A64_BGA_396" H 4950 7500 60  0001 C CNN
+F 3 "" H 4950 7500 60  0001 C CNN
+	5    4950 7500
+	1    0    0    -1  
+$EndComp
+$Comp
+L A64 U501
+U 6 1 57CDBD48
+P 14800 6350
+F 0 "U501" H 14800 6300 60  0000 C CNN
+F 1 "A64" H 14800 6400 60  0000 C CNN
+F 2 "Custom Parts:A64_BGA_396" H 14800 6350 60  0001 C CNN
+F 3 "" H 14800 6350 60  0001 C CNN
+	6    14800 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L A64 U501
+U 8 1 57CDBFB3
+P 10300 6400
+F 0 "U501" H 10300 6350 60  0000 C CNN
+F 1 "A64" H 10300 6450 60  0000 C CNN
+F 2 "Custom Parts:A64_BGA_396" H 10300 6400 60  0001 C CNN
+F 3 "" H 10300 6400 60  0001 C CNN
+	8    10300 6400
+	1    0    0    -1  
+$EndComp
+Text GLabel 3250 2850 0    47   UnSpc ~ 0
+A64_3V3
+$Comp
+L C_Small2 C903
+U 1 1 57CDC075
+P 3700 3100
+F 0 "C903" H 3650 3150 50  0000 R CNN
+F 1 "470n" H 3750 3150 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" V 3700 3100 50  0001 C CNN
+F 3 "" V 3700 3100 50  0000 C CNN
+	1    3700 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L C_Small2 C902
+U 1 1 57CDC0B7
+P 3600 3100
+F 0 "C902" H 3550 3150 50  0000 R CNN
+F 1 "470n" H 3650 3150 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" V 3600 3100 50  0001 C CNN
+F 3 "" V 3600 3100 50  0000 C CNN
+	1    3600 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR0153
+U 1 1 57CDC12F
+P 3600 3500
+F 0 "#PWR0153" H 3600 3250 50  0001 C CNN
+F 1 "GND" H 3600 3350 50  0000 C CNN
+F 2 "" H 3600 3500 50  0000 C CNN
+F 3 "" H 3600 3500 50  0000 C CNN
+	1    3600 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small2 C901
+U 1 1 57CDC16D
+P 3500 3100
+F 0 "C901" H 3450 3150 50  0000 R CNN
+F 1 "4.7µ" H 3550 3150 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805" V 3500 3100 50  0001 C CNN
+F 3 "" V 3500 3100 50  0000 C CNN
+	1    3500 3100
+	0    1    1    0   
+$EndComp
+Text GLabel 3600 3800 0    47   Output ~ 0
+A64_LCD_D2
+Text GLabel 3600 3900 0    47   Output ~ 0
+A64_LCD_D3
+Text GLabel 3600 4000 0    47   Output ~ 0
+A64_LCD_D4
+Text GLabel 3600 4100 0    47   Output ~ 0
+A64_LCD_D5
+Text GLabel 3600 4200 0    47   Output ~ 0
+A64_LCD_D6
+Text GLabel 3600 4300 0    47   Output ~ 0
+A64_LCD_D7
+Text GLabel 3600 4400 0    47   Output ~ 0
+A64_LCD_D10
+Text GLabel 3600 4500 0    47   Output ~ 0
+A64_LCD_D11
+Text GLabel 3600 4600 0    47   Output ~ 0
+A64_LCD_D12
+Text GLabel 3600 4700 0    47   Output ~ 0
+A64_LCD_D13
+Text GLabel 3600 4800 0    47   Output ~ 0
+A64_LCD_D14
+Text GLabel 3600 4900 0    47   Output ~ 0
+A64_LCD_D15
+Text GLabel 3600 5000 0    47   Output ~ 0
+A64_LCD_D18
+Text GLabel 3600 5100 0    47   Output ~ 0
+A64_LCD_D19
+Text GLabel 3600 5200 0    47   Output ~ 0
+A64_LCD_D20
+Text GLabel 3600 5300 0    47   Output ~ 0
+A64_LCD_D21
+Text GLabel 3600 5400 0    47   Output ~ 0
+A64_LCD_D22
+Text GLabel 3600 5500 0    47   Output ~ 0
+A64_LCD_D23
+Text GLabel 2700 5600 0    47   Output ~ 0
+A64_LCD_PIXCK
+Text GLabel 3600 5700 0    47   Output ~ 0
+A64_LCD_DE
+Text GLabel 3600 5800 0    47   Output ~ 0
+A64_LCD_HSYNC
+Text GLabel 3600 5900 0    47   Output ~ 0
+A64_LCD_VSYNC
+Text Notes 1950 4850 2    47   ~ 0
+LCD Interface\nVideo OUT from A64 to FPGA
+NoConn ~ 3950 6000
+NoConn ~ 3950 6100
+NoConn ~ 3950 6200
+NoConn ~ 3950 6400
+NoConn ~ 3950 6500
+NoConn ~ 3950 6600
+NoConn ~ 3950 6700
+NoConn ~ 3950 6800
+NoConn ~ 3950 6900
+NoConn ~ 3950 7000
+NoConn ~ 3950 7100
+NoConn ~ 3950 7200
+NoConn ~ 3950 7300
+Text GLabel 9000 3600 0    47   UnSpc ~ 0
+A64_3V3
+$Comp
+L C_Small2 C904
+U 1 1 57CDE08A
+P 9100 3900
+F 0 "C904" H 9050 3950 50  0000 R CNN
+F 1 "470n" H 9150 3950 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" V 9100 3900 50  0001 C CNN
+F 3 "" V 9100 3900 50  0000 C CNN
+	1    9100 3900
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR0154
+U 1 1 57CDE18E
+P 9100 4200
+F 0 "#PWR0154" H 9100 3950 50  0001 C CNN
+F 1 "GND" H 9100 4050 50  0000 C CNN
+F 2 "" H 9100 4200 50  0000 C CNN
+F 3 "" H 9100 4200 50  0000 C CNN
+	1    9100 4200
+	1    0    0    -1  
+$EndComp
+Text GLabel 7900 4500 0    47   Input ~ 0
+A64_CAM_PCLK
+Text GLabel 7900 4600 0    47   Output ~ 0
+A64_CAM_MCLK
+Text GLabel 8900 4700 0    47   Input ~ 0
+A64_CAM_HSYNC
+Text GLabel 8900 4800 0    47   Input ~ 0
+A64_CAM_VSYNC
+Text GLabel 8900 4900 0    47   Input ~ 0
+A64_CAM_D0
+Text GLabel 8900 5000 0    47   Input ~ 0
+A64_CAM_D1
+Text GLabel 8900 5100 0    47   Input ~ 0
+A64_CAM_D2
+Text GLabel 8900 5200 0    47   Input ~ 0
+A64_CAM_D3
+Text GLabel 8900 5300 0    47   Input ~ 0
+A64_CAM_D4
+Text GLabel 8900 5400 0    47   Input ~ 0
+A64_CAM_D5
+Text GLabel 8900 5500 0    47   Input ~ 0
+A64_CAM_D6
+Text GLabel 8900 5600 0    47   Input ~ 0
+A64_CAM_D7
+$Comp
+L R_Small R906
+U 1 1 57CDE394
+P 9000 6350
+F 0 "R906" H 9030 6370 50  0000 L CNN
+F 1 "10k" H 9030 6310 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 9000 6350 50  0001 C CNN
+F 3 "" H 9000 6350 50  0000 C CNN
+	1    9000 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R905
+U 1 1 57CDE63A
+P 8750 6350
+F 0 "R905" H 8780 6370 50  0000 L CNN
+F 1 "10k" H 8780 6310 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 8750 6350 50  0001 C CNN
+F 3 "" H 8750 6350 50  0000 C CNN
+	1    8750 6350
+	1    0    0    -1  
+$EndComp
+Text GLabel 8650 6600 0    47   UnSpc ~ 0
+A64_3V3
+Text GLabel 13500 3650 0    47   UnSpc ~ 0
+A64_3V3
+$Comp
+L C_Small2 C905
+U 1 1 57CDF25B
+P 13600 3950
+F 0 "C905" H 13550 4000 50  0000 R CNN
+F 1 "470n" H 13650 4000 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" V 13600 3950 50  0001 C CNN
+F 3 "" V 13600 3950 50  0000 C CNN
+	1    13600 3950
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR0155
+U 1 1 57CDF261
+P 13600 4250
+F 0 "#PWR0155" H 13600 4000 50  0001 C CNN
+F 1 "GND" H 13600 4100 50  0000 C CNN
+F 2 "" H 13600 4250 50  0000 C CNN
+F 3 "" H 13600 4250 50  0000 C CNN
+	1    13600 4250
+	1    0    0    -1  
+$EndComp
+Text GLabel 13350 4550 0    47   Output ~ 0
+A64_FPGA_MOSI
+Text GLabel 13350 4650 0    47   Input ~ 0
+A64_FPGA_MISO
+Text GLabel 12500 4750 0    47   Output ~ 0
+A64_FPGA_SCLK
+Text GLabel 13350 4850 0    47   Output ~ 0
+A64_FPGA_~CS
+Text GLabel 8850 6000 0    47   BiDi ~ 0
+A64_FPGA_IO0
+NoConn ~ 13800 5150
+NoConn ~ 13800 5250
+NoConn ~ 13800 5350
+NoConn ~ 13800 5450
+NoConn ~ 13800 5550
+NoConn ~ 13800 5650
+NoConn ~ 13800 5750
+NoConn ~ 13800 5850
+NoConn ~ 13800 5950
+NoConn ~ 13800 6050
+NoConn ~ 13800 6150
+$Comp
+L R_Small R907
+U 1 1 57CE144A
+P 12700 4750
+F 0 "R907" H 12730 4770 50  0000 L CNN
+F 1 "0R" H 12730 4710 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 12700 4750 50  0001 C CNN
+F 3 "" H 12700 4750 50  0000 C CNN
+	1    12700 4750
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R904
+U 1 1 57CE1598
+P 8150 4600
+F 0 "R904" H 8180 4620 50  0000 L CNN
+F 1 "0R" H 8180 4560 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 8150 4600 50  0001 C CNN
+F 3 "" H 8150 4600 50  0000 C CNN
+	1    8150 4600
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R903
+U 1 1 57CE188D
+P 8150 4500
+F 0 "R903" H 8180 4520 50  0000 L CNN
+F 1 "0R" H 8180 4460 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 8150 4500 50  0001 C CNN
+F 3 "" H 8150 4500 50  0000 C CNN
+	1    8150 4500
+	0    1    -1   0   
+$EndComp
+Text Notes 7150 5050 2    47   ~ 0
+Camera Interface\nVideo IN to A64 from FPGA
+$Comp
+L R_Small R901
+U 1 1 57CE2175
+P 2950 5600
+F 0 "R901" H 2980 5620 50  0000 L CNN
+F 1 "0R" H 2980 5560 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 2950 5600 50  0001 C CNN
+F 3 "" H 2950 5600 50  0000 C CNN
+	1    2950 5600
+	0    1    1    0   
+$EndComp
+NoConn ~ 9300 5900
+NoConn ~ 9300 6100
+NoConn ~ 9300 6200
+Wire Wire Line
+	3800 3600 3950 3600
+Wire Wire Line
+	3800 2850 3800 3600
+Wire Wire Line
+	3950 3500 3800 3500
+Connection ~ 3800 3500
+Wire Wire Line
+	3250 2850 3800 2850
+Wire Wire Line
+	3600 3000 3600 2850
+Connection ~ 3600 2850
+Wire Wire Line
+	3700 3000 3700 2850
+Connection ~ 3700 2850
+Wire Wire Line
+	3700 3400 3700 3200
+Wire Wire Line
+	3500 3400 3700 3400
+Wire Wire Line
+	3600 3200 3600 3500
+Connection ~ 3600 3400
+Wire Wire Line
+	3500 3000 3500 2850
+Connection ~ 3500 2850
+Wire Wire Line
+	3500 3400 3500 3200
+Wire Notes Line
+	2300 6000 2050 6000
+Wire Notes Line
+	2050 6000 2050 3700
+Wire Notes Line
+	2050 3700 2400 3700
+Wire Wire Line
+	3600 3800 3950 3800
+Wire Wire Line
+	3600 3900 3950 3900
+Wire Wire Line
+	3600 4000 3950 4000
+Wire Wire Line
+	3600 4100 3950 4100
+Wire Wire Line
+	3600 4200 3950 4200
+Wire Wire Line
+	3600 4300 3950 4300
+Wire Wire Line
+	3600 4400 3950 4400
+Wire Wire Line
+	3600 4500 3950 4500
+Wire Wire Line
+	3600 4600 3950 4600
+Wire Wire Line
+	3600 4700 3950 4700
+Wire Wire Line
+	3600 4800 3950 4800
+Wire Wire Line
+	3600 4900 3950 4900
+Wire Wire Line
+	3600 5000 3950 5000
+Wire Wire Line
+	3600 5100 3950 5100
+Wire Wire Line
+	3600 5200 3950 5200
+Wire Wire Line
+	3600 5300 3950 5300
+Wire Wire Line
+	3600 5400 3950 5400
+Wire Wire Line
+	3600 5500 3950 5500
+Wire Wire Line
+	3600 5700 3950 5700
+Wire Wire Line
+	3600 5800 3950 5800
+Wire Wire Line
+	3600 5900 3950 5900
+Wire Wire Line
+	9000 3600 9250 3600
+Wire Wire Line
+	9250 3600 9250 4300
+Wire Wire Line
+	9250 4300 9300 4300
+Wire Wire Line
+	9100 3600 9100 3800
+Connection ~ 9100 3600
+Wire Wire Line
+	9100 4000 9100 4200
+Wire Wire Line
+	9300 4700 8900 4700
+Wire Wire Line
+	9300 4800 8900 4800
+Wire Wire Line
+	9300 4900 8900 4900
+Wire Wire Line
+	9300 5000 8900 5000
+Wire Wire Line
+	9300 5100 8900 5100
+Wire Wire Line
+	9300 5200 8900 5200
+Wire Wire Line
+	9300 5300 8900 5300
+Wire Wire Line
+	9300 5400 8900 5400
+Wire Wire Line
+	9300 5500 8900 5500
+Wire Wire Line
+	9300 5600 8900 5600
+Wire Wire Line
+	8750 5700 9300 5700
+Wire Wire Line
+	8750 5700 8750 6250
+Wire Wire Line
+	8750 6450 8750 6600
+Wire Wire Line
+	8650 6600 9000 6600
+Wire Wire Line
+	9000 6600 9000 6450
+Connection ~ 8750 6600
+Wire Wire Line
+	13500 3650 13750 3650
+Wire Wire Line
+	13750 3650 13750 4350
+Wire Wire Line
+	13750 4350 13800 4350
+Wire Wire Line
+	13600 3650 13600 3850
+Connection ~ 13600 3650
+Wire Wire Line
+	13600 4050 13600 4250
+Wire Wire Line
+	13350 4550 13800 4550
+Wire Wire Line
+	13350 4650 13800 4650
+Wire Wire Line
+	13800 4850 13350 4850
+Wire Wire Line
+	8850 6000 9300 6000
+Wire Wire Line
+	9300 5800 9000 5800
+Wire Wire Line
+	9000 5800 9000 6250
+Wire Wire Line
+	12500 4750 12600 4750
+Wire Wire Line
+	12800 4750 13800 4750
+Wire Wire Line
+	8050 4500 7900 4500
+Wire Wire Line
+	7900 4600 8050 4600
+Wire Wire Line
+	8250 4500 9300 4500
+Wire Wire Line
+	8250 4600 9300 4600
+Wire Notes Line
+	7400 4350 7250 4350
+Wire Notes Line
+	7250 4350 7250 5700
+Wire Notes Line
+	7250 5700 7400 5700
+Wire Wire Line
+	2700 5600 2850 5600
+Wire Wire Line
+	3050 5600 3950 5600
+$Comp
+L STM1061 U901
+U 1 1 57C40F9E
+P 6500 1550
+F 0 "U901" H 6550 1200 47  0000 L CNN
+F 1 "STM1061N31WX6F" V 6400 1550 35  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 6500 1550 47  0001 C CNN
+F 3 "" H 6500 1550 47  0001 C CNN
+	1    6500 1550
+	-1   0    0    -1  
+$EndComp
+Text GLabel 5600 800  0    47   UnSpc ~ 0
+A64_3V3
+Wire Wire Line
+	5600 800  6500 800 
+Wire Wire Line
+	6500 800  6500 1050
+$Comp
+L R_Small R902
+U 1 1 57C4121E
+P 5750 1100
+F 0 "R902" H 5780 1120 50  0000 L CNN
+F 1 "10k" H 5780 1060 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 5750 1100 50  0001 C CNN
+F 3 "" H 5750 1100 50  0000 C CNN
+	1    5750 1100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 1000 5750 800 
+Connection ~ 5750 800 
+Wire Wire Line
+	5750 1200 5750 1550
+Wire Wire Line
+	5550 1550 6000 1550
+$Comp
+L GND #PWR0156
+U 1 1 57C4137F
+P 6500 2300
+F 0 "#PWR0156" H 6500 2050 50  0001 C CNN
+F 1 "GND" H 6500 2150 50  0000 C CNN
+F 2 "" H 6500 2300 50  0000 C CNN
+F 3 "" H 6500 2300 50  0000 C CNN
+	1    6500 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 2300 6500 2050
+Text GLabel 5550 1550 0    47   Output ~ 0
+A64_FPGA_OE
+Connection ~ 5750 1550
+NoConn ~ 13800 4950
+NoConn ~ 13800 5050
+$EndSCHEMATC
