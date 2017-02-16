@@ -15,6 +15,9 @@ but not yet tested. To run the display at 4k will require feeding it with VESA D
 this is far from complete so I will be using the display at first in a mode where it upscales from 1080p - which
 still looks a lot nicer than a native 1080p LCD.
 
+I am also working on a custom HLS tool, not yet released, that will be used to create much of the FPGA processing
+code that runs on the headset. An early version of this was used for the aforementioned low res demos.
+
 ## Hardware Features
 
 The main components of the hardware are:
@@ -25,3 +28,7 @@ The main components of the hardware are:
  - Allwinner A64 quad-core ARM applications processor (with basic GPU for 3D rendering)
  - WiFi and Bluetooth
  - USB-C for power, data and DisplayPort video
+
+A rendering of the mainboard PCB is below
+
+![Mainboard Render](https://ds0.me/ar/mainboard-render-sm.jpg)

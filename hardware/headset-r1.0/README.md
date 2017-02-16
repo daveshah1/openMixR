@@ -1,6 +1,6 @@
 # Hardware for openMixR 1.0
 
-All of the hardware is designed in KiCad, in the spirit of open source.
+All of the hardware is designed in KiCad 4.0, in the spirit of open source.
 
 - *mainboard* is the headset mainboard, containing the FPGA and processor. It is a 150x90mm 8-layer board
 with a minimum track/space of 4mil and a controlled impedance requirement.
@@ -16,3 +16,5 @@ contains 3D models for many of the components used (for the most part converted 
 
 PDF schematics are included for all of the boards, if you don't want to install KiCad. Gerbers are also included for the mainboard,
 which is the only board which I've ordered so far.
+
+A bill of materials, placement data and impedance control diagramsm are also included for the mainboard.
