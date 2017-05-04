@@ -1,0 +1,6 @@
+[submodule "fpga/modules/CSI2Rx"]
+	path = fpga/modules/CSI2Rx
+	url = https://github.com/daveshah1/CSI2Rx.git
+[submodule "fpga/modules/DSITx"]
+	path = fpga/modules/DSITx
+	url = https://github.com/daveshah1/DSITx.git
