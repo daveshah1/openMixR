@@ -14,7 +14,6 @@ board folders, with the exception  of *customconn* which is the custom LCD and c
 interconnect the mainboard and subassemblies. *parts.pretty* contains all of the custom footprints; and *3d*
 contains 3D models for many of the components used (for the most part converted from the models provided by their vendors).
 
-PDF schematics are included for all of the boards, if you don't want to install KiCad. Gerbers are also included for the mainboard,
-which is the only board which I've ordered so far.
+PDF schematics are included for all of the boards, if you don't want to install KiCad. Gerbers are also included for all of the boards.
 
-A bill of materials, placement data and impedance control diagramsm are also included for the mainboard.
+A bill of materials, placement data and impedance control diagrams are also included for the mainboard.
