@@ -129,7 +129,7 @@ entity ov13850_demo is
     a64_cam_data : inout std_logic_vector(7 downto 0);
     a64_cam_vsync : inout std_logic;
     a64_cam_hsync : inout std_logic;
-    
+
    --DDR3 interface
     ddr3_addr : out std_logic_vector(14 downto 0);
     ddr3_ba : out std_logic_vector(2 downto 0);
@@ -148,3 +148,202 @@ entity ov13850_demo is
     ddr3_odt : out std_logic_vector(0 downto 0)
   );
 end ov13850_demo;
+
+architecture Behavioral of openmixr_top is
+
+  component sys_pll is
+    port(
+      clkin : in std_logic;
+      clock_50 : out std_logic
+    );
+  end component;
+
+  component video_pll is
+    port(
+      clkin : in std_logic;
+      pixel_clock : out std_logic
+    );
+  end component;
+
+  component dsi_pll is
+    port(
+      clkin : in std_logic;
+      hs_word_clock : out std_logic;
+      hs_bit_clock : out std_logic;
+      hs_out_clock : out std_logic;
+      ls_2xbit_clock : out std_logic
+    );
+  end component;
+
+  signal global_reset : std_logic;
+  signal sys_clock : std_logic;
+  signal clock_50 : std_logic;
+
+  signal dsi_pixel_clock : std_logic;
+  signal dsi_hs_word_clock, dsi_hs_bit_clock, dsi_hs_out_clock, dsi_ls_2xbit_clock : std_logic;
+
+  signal pattern_vsync, pattern_hsync, pattern_den, pattern_line_start : std_logic;
+  signal pattern_rgb : std_logic_vector(23 downto 0);
+  signal pattern_sel : std_logic_vector(1 downto 0);
+  signal pattern_x : natural range 0 to 1079;
+  signal pattern_y : natural range 0 to 1919;
+
+  signal buttons : std_logic_vector(7 downto 0) := (others => '0');
+
+  signal init_done : std_logic;
+
+begin
+  --System core
+  global_reset <= buttons(0) and buttons(3);
+
+  rgb_led(2) <= not init_done;
+  rgb_led(1) <= init_done;
+  rgb_led(0) <= lcd_te;
+
+  clkbuf : IBUFGDS
+    generic map(
+        DIFF_TERM => TRUE,
+        IBUF_LOW_PWR => FALSE,
+        IOSTANDARD => "DEFAULT")
+    port map(
+        O => sys_clock,
+        I => clock_p,
+        IB => clock_n);
+
+  --Test pattern generator
+  pattern_sel <= buttons(5 downto 4);
+
+  vpll : video_pll
+    port map(
+      clkin => sys_clock,
+      pixel_clock => dsi_pixel_clock
+    );
+
+  patgen : entity work.test_pattern_enhanced
+    generic map(
+      video_hlength => 1152,
+      video_vlength => 4326,
+      video_hsync_pol => false,
+      video_hsync_len => 16,
+      video_hbp_len => 16,
+      video_h_visible => 1080,
+      video_vsync_pol => false,
+      video_vsync_len => 8,
+      video_vbp_len => 8,
+      video_v_visible => 1920)
+    port map(
+      pixel_clock => dsi_pixel_clock,
+      reset => global_reset,
+      pattern_sel => pattern_sel,
+      video_vsync => pattern_vsync,
+      video_hsync => pattern_hsync,
+      video_den => pattern_den,
+      video_line_start => pattern_line_start,
+      pixel_x => pattern_x,
+      pixel_y => pattern_y,
+      video_pixel => pattern_rgb);
+
+  --DSI driver
+  dsipll : dsi_pll
+    port map(
+      clkin => sys_clock,
+      hs_word_clock => hs_word_clock,
+      hs_bit_clock => hs_bit_clock,
+      hs_out_clock => hs_out_clock,
+      ls_2xbit_clock => ls_2xbit_clock);
+
+  dsidrv : entity work.dsi_tx_dual_dsi_top
+    generic map(
+      command_mode => true,
+      vsync_to_first_cmd => 8160,
+      hsync_to_cmd => 1,
+      line_width => 1080,
+      frame_height => 1920)
+    port map(
+      pixel_clock => dsi_pixel_clock,
+      hs_word_clock => dsi_hs_word_clock,
+      hs_bit_clock => dsi_hs_bit_clock,
+      hs_out_clock => dsi_hs_out_clock,
+      ls_2xbit_clock => dsi_ls_2xbit_clock,
+      reset => global_reset,
+      video_hsync => pattern_hsync,
+      video_vsync => pattern_vsync,
+      video_den => pattern_den,
+      video_rgb => pattern_rgb,
+      video_pixel_x => pattern_x,
+      vddd_en => vddd_en,
+      vdda_en => vdda_en,
+      lcd_reset_b => lcd_reset_b,
+      pwm_en => pwm_en,
+
+      panel_init_done => init_done,
+
+      dphy0_hs_clk => dphy0_hs_clk,
+      dphy0_lp_clk => dphy0_lp_clk,
+      dphy0_hs_d0 => dphy0_hs_d0,
+      dphy0_lp_d0 => dphy0_lp_d0,
+      dphy0_hs_d1 => dphy0_hs_d1,
+      dphy0_lp_d1 => dphy0_lp_d1,
+      dphy0_hs_d2 => dphy0_hs_d2,
+      dphy0_lp_d2 => dphy0_lp_d2,
+      dphy0_hs_d3 => dphy0_hs_d3,
+      dphy0_lp_d3 => dphy0_lp_d3,
+
+      dphy1_hs_clk => dphy1_hs_clk,
+      dphy1_lp_clk => dphy1_lp_clk,
+      dphy1_hs_d0 => dphy1_hs_d0,
+      dphy1_lp_d0 => dphy1_lp_d0,
+      dphy1_hs_d1 => dphy1_hs_d1,
+      dphy1_lp_d1 => dphy1_lp_d1,
+      dphy1_hs_d2 => dphy1_hs_d2,
+      dphy1_lp_d2 => dphy1_lp_d2,
+      dphy1_hs_d3 => dphy1_hs_d3,
+      dphy1_lp_d3 => dphy1_lp_d3
+    );
+
+
+  --Assign default values to some unused IO ports
+
+  imu_cs_n <= '1';
+
+  ftdi_data <= (others => 'Z');
+  ftdi_siwu_n <= '1';
+  ftdi_rd_n <= '1';
+  ftdi_wr_n <= '1';
+
+  ccg_io0 <= 'Z';
+  ccg_io1 <= 'Z';
+  dp_aux_p <= 'Z';
+  dp_aux_n <= 'Z';
+  dp_hpd <= 'Z';
+  dprt_en <= '1';
+  dprt_sda <= 'Z';
+  dprt_scl <= 'Z';
+
+  cam0_gpio <= 'Z';
+  cam1_gpio <= 'Z';
+  cam0_led <= '0';
+  cam1_led <= '0';
+
+  lcd_gpio <= "ZZZ";
+  lcd_psu_scl <= 'Z';
+  lcd_psu_sda <= 'Z';
+
+  a64_miso <= 'Z';
+  a64_io0 <= 'Z';
+
+  a64_cam_pixclk <= 'Z';
+  a64_cam_data <= (others => 'Z');
+  a64_cam_vsync <= 'Z';
+  a64_cam_hsync <= 'Z';
+  a64_boot_ctl <= '0';
+  a64_reset_ctl <= '0';
+
+  ddr_dq <= (others => 'Z');
+  ddr_dqs_n <= (others => 'Z');
+  ddr_dqs_p <= (others => 'Z');
+
+  ddr_reset_n <= '0';
+  ddr_ck_n <= '0';
+  ddr_ck_p <= '1';
+end Behavioral;
