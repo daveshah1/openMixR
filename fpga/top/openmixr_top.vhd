@@ -505,6 +505,7 @@ begin
       input_line_start => camr_line_start,
       input_odd_line => camr_odd_line,
       input_prev_line_data => camr_prev_line_data,
+      input_data => camr_data,
       output_hsync => ispr_hsync,
       output_vsync => ispr_vsync,
       output_den => ispr_den,
