@@ -9,7 +9,7 @@ use UNISIM.VComponents.all;
 --Copyright (C) 2017 David Shah
 --Licensed under the MIT License
 
-entity ov13850_demo is
+entity openmixr_top is
   Port (
     --Core signals
     clock_p : in std_logic;
@@ -79,8 +79,8 @@ entity ov13850_demo is
     lcd_te : in std_logic;
     lcd_id : in std_logic_vector(3 downto 0);
     lcd_gpio : inout std_logic_vector(2 downto 0);
-    lcd_psu_sda : inout std_logic_vector;
-    lcd_psu_scl : inout std_logic_vector;
+    lcd_psu_sda : inout std_logic;
+    lcd_psu_scl : inout std_logic;
 
     --DSI port 0 (master, left)
     dphy0_hs_clk : inout STD_LOGIC_VECTOR (1 downto 0); --DSI lanes; hs is high speed and lp is low power for resistor network
@@ -147,7 +147,7 @@ entity ov13850_demo is
     ddr3_dm : out std_logic_vector(3 downto 0);
     ddr3_odt : out std_logic_vector(0 downto 0)
   );
-end ov13850_demo;
+end openmixr_top;
 
 architecture Behavioral of openmixr_top is
 
@@ -175,18 +175,45 @@ architecture Behavioral of openmixr_top is
     );
   end component;
 
+  component camera_pll is
+    port(
+      sysclk : in std_logic;
+      camera_pixel_clock : out std_logic;
+      camera_mclk : out std_logic;
+      i2c_clkin : out std_logic);
+  end component;
+
   signal global_reset : std_logic;
   signal sys_clock : std_logic;
   signal clock_50 : std_logic;
 
   signal dsi_pixel_clock : std_logic;
   signal dsi_hs_word_clock, dsi_hs_bit_clock, dsi_hs_out_clock, dsi_ls_2xbit_clock : std_logic;
+  signal pwm_en : std_logic;
 
   signal pattern_vsync, pattern_hsync, pattern_den, pattern_line_start : std_logic;
   signal pattern_rgb : std_logic_vector(23 downto 0);
   signal pattern_sel : std_logic_vector(1 downto 0);
   signal pattern_x : natural range 0 to 1079;
   signal pattern_y : natural range 0 to 1919;
+
+  signal i2c_clk_in, i2c_clk_div_1, i2c_clk_div : std_logic;
+  signal cam_loading, csi_en, csi_rst, cam_mclk : std_logic;
+
+  signal cam_rstn_int : std_logic;
+  signal cam_pixel_clock : std_logic;
+
+  signal caml_line_start, caml_den, caml_hsync, caml_vsync, caml_odd_line : std_logic;
+  signal caml_data, caml_prev_line_data : std_logic_vector(19 downto 0);
+
+  signal camr_line_start, camr_den, camr_hsync, camr_vsync, camr_odd_line : std_logic;
+  signal camr_data, camr_prev_line_data : std_logic_vector(19 downto 0);
+
+  signal ispl_line_start, ispl_den, ispl_hsync, ispl_vsync : std_logic;
+  signal ispl_data_even, ispl_data_odd : std_logic_vector(23 downto 0);
+
+  signal ispr_line_start, ispr_den, ispr_hsync, ispr_vsync : std_logic;
+  signal ispr_data_even, ispr_data_odd : std_logic_vector(23 downto 0);
 
   signal buttons : std_logic_vector(7 downto 0) := (others => '0');
 
@@ -247,10 +274,10 @@ begin
   dsipll : dsi_pll
     port map(
       clkin => sys_clock,
-      hs_word_clock => hs_word_clock,
-      hs_bit_clock => hs_bit_clock,
-      hs_out_clock => hs_out_clock,
-      ls_2xbit_clock => ls_2xbit_clock);
+      hs_word_clock => dsi_hs_word_clock,
+      hs_bit_clock => dsi_hs_bit_clock,
+      hs_out_clock => dsi_hs_out_clock,
+      ls_2xbit_clock => dsi_ls_2xbit_clock);
 
   dsidrv : entity work.dsi_tx_dual_dsi_top
     generic map(
@@ -301,6 +328,151 @@ begin
       dphy1_lp_d3 => dphy1_lp_d3
     );
 
+  --Cameras
+  campll : camera_pll
+    port map(
+      sysclk => sys_clock,
+      camera_pixel_clock => cam_pixel_clock,
+      camera_mclk => cam_mclk,
+      i2c_clkin => i2c_clk_in
+    );
+
+  cam0_mclk <= cam_mclk;
+  cam1_mclk <= cam_mclk;
+
+  i2c_clkdiv : BUFR
+    generic map(
+      BUFR_DIVIDE => "8",
+      SIM_DEVICE => "7SERIES")
+    port map(
+      O => i2c_clk_div_1,
+      CE => '1',
+      CLR => global_reset,
+      I => i2c_clk_in);
+
+  i2c_clkdiv2 : BUFR
+    generic map(
+      BUFR_DIVIDE => "4",
+      SIM_DEVICE => "7SERIES")
+    port map(
+      O => i2c_clk_div,
+      CE => '1',
+      CLR => global_reset,
+      I => i2c_clk_div_1);
+
+  cam0_ctl : entity work.ov16825_control_top
+    port map (
+      reset => global_reset,
+      clock => i2c_clk_div,
+      i2c_sda => cam0_i2c_sda,
+      i2c_sck => cam0_i2c_sck,
+      rst_out => cam_rstn_int,
+      loading_out => cam_loading);
+
+  cam1_ctl : entity work.ov16825_control_top
+    port map (
+      reset => global_reset,
+      clock => i2c_clk_div,
+      i2c_sda => cam1_i2c_sda,
+      i2c_sck => cam1_i2c_sck,
+      rst_out => open,
+      loading_out => open);
+
+  cam_rstn <= cam_rstn_int;
+  csi_rst <= not cam_rstn_int;
+  csi_en <= not cam_loading;
+
+  csi0_rx : entity work.csi_rx_4lane
+    generic map(
+      fpga_series => "7SERIES",
+      dphy_term_en => true,
+      d0_invert => false,
+      d1_invert => false,
+      d2_invert => false,
+      d3_invert => false,
+      d0_skew => 10,
+      d1_skew => 10,
+      d2_skew => 10,
+      d3_skew => 10,
+      video_hlength =>  2112,
+      video_vlength => 1248,
+      video_hsync_pol => true,
+      video_hsync_len => 8,
+      video_hbp_len => 8,
+      video_h_visible => 1920,
+      video_vsync_pol => true,
+      video_vsync_len => 8,
+      video_vbp_len => 8,
+      video_v_visible => 1080,
+      pixels_per_clock => 2,
+      generate_idelayctrl => true)
+    port map(
+      ref_clock_in => sys_clock,
+      pixel_clock_in => cam_pixel_clock,
+      byte_clock_out => open,
+      enable => csi_en,
+      reset => csi_rst,
+      video_valid => open,
+
+      dphy_clk => csi0_clk,
+      dphy_d0 => csi0_d0,
+      dphy_d1 => csi0_d1,
+      dphy_d2 => csi0_d2,
+      dphy_d3 => csi0_d3,
+
+      video_hsync => caml_hsync,
+      video_vsync => caml_vsync,
+      video_den => caml_den,
+      video_line_start => caml_line_start,
+      video_odd_line => caml_odd_line,
+      video_data => caml_data,
+      video_prev_line_data => caml_prev_line_data);
+
+    csi1_rx : entity work.csi_rx_4lane
+      generic map(
+        fpga_series => "7SERIES",
+        dphy_term_en => true,
+        d0_invert => false,
+        d1_invert => false,
+        d2_invert => false,
+        d3_invert => false,
+        d0_skew => 10,
+        d1_skew => 10,
+        d2_skew => 10,
+        d3_skew => 10,
+        video_hlength =>  2112,
+        video_vlength => 1248,
+        video_hsync_pol => true,
+        video_hsync_len => 8,
+        video_hbp_len => 8,
+        video_h_visible => 1920,
+        video_vsync_pol => true,
+        video_vsync_len => 8,
+        video_vbp_len => 8,
+        video_v_visible => 1080,
+        pixels_per_clock => 2,
+        generate_idelayctrl => true)
+      port map(
+        ref_clock_in => sys_clock,
+        pixel_clock_in => cam_pixel_clock,
+        byte_clock_out => open,
+        enable => csi_en,
+        reset => csi_rst,
+        video_valid => open,
+
+        dphy_clk => csi1_clk,
+        dphy_d0 => csi1_d0,
+        dphy_d1 => csi1_d1,
+        dphy_d2 => csi1_d2,
+        dphy_d3 => csi1_d3,
+
+        video_hsync => camr_hsync,
+        video_vsync => camr_vsync,
+        video_den => camr_den,
+        video_line_start => camr_line_start,
+        video_odd_line => camr_odd_line,
+        video_data => camr_data,
+        video_prev_line_data => camr_prev_line_data);
 
   --Assign default values to some unused IO ports
 
@@ -322,8 +494,8 @@ begin
 
   cam0_gpio <= 'Z';
   cam1_gpio <= 'Z';
-  cam0_led <= '0';
-  cam1_led <= '0';
+  cam0_led <= buttons(7);
+  cam1_led <= buttons(7);
 
   lcd_gpio <= "ZZZ";
   lcd_psu_scl <= 'Z';
@@ -339,11 +511,11 @@ begin
   a64_boot_ctl <= '0';
   a64_reset_ctl <= '0';
 
-  ddr_dq <= (others => 'Z');
-  ddr_dqs_n <= (others => 'Z');
-  ddr_dqs_p <= (others => 'Z');
+  ddr3_dq <= (others => 'Z');
+  ddr3_dqs_n <= (others => 'Z');
+  ddr3_dqs_p <= (others => 'Z');
 
-  ddr_reset_n <= '0';
-  ddr_ck_n <= '0';
-  ddr_ck_p <= '1';
+  ddr3_reset_n <= '0';
+  ddr3_ck_n(0) <= '0';
+  ddr3_ck_p(0) <= '1';
 end Behavioral;
