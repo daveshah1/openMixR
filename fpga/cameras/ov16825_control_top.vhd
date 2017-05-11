@@ -42,7 +42,7 @@ begin
       i2c_sck => i2c_sck,
       i2c_sda => i2c_sda);
 
-  regs : entity work.ov16825_1080p120_regs
+  regs : entity work.ov16825_1080p_openmixr_regs
     port map(
       clock => clock,
       address => cmd_addr,

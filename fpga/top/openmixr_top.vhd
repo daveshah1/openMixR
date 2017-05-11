@@ -211,9 +211,11 @@ architecture Behavioral of openmixr_top is
 
   signal ispl_line_start, ispl_den, ispl_hsync, ispl_vsync : std_logic;
   signal ispl_data_even, ispl_data_odd : std_logic_vector(23 downto 0);
+  signal ispl_x : natural range 0 to 1079;
 
   signal ispr_line_start, ispr_den, ispr_hsync, ispr_vsync : std_logic;
   signal ispr_data_even, ispr_data_odd : std_logic_vector(23 downto 0);
+  signal ispr_x : natural range 0 to 1079;
 
   signal buttons : std_logic_vector(7 downto 0) := (others => '0');
 
@@ -411,15 +413,15 @@ begin
       d2_skew => 10,
       d3_skew => 10,
       video_hlength =>  2112,
-      video_vlength => 1248,
+      video_vlength => 2496,
       video_hsync_pol => true,
       video_hsync_len => 8,
       video_hbp_len => 8,
-      video_h_visible => 1920,
+      video_h_visible => 1080,
       video_vsync_pol => true,
       video_vsync_len => 8,
       video_vbp_len => 8,
-      video_v_visible => 1080,
+      video_v_visible => 1920,
       pixels_per_clock => 2,
       generate_idelayctrl => true)
     port map(
@@ -457,17 +459,17 @@ begin
         d2_skew => 10,
         d3_skew => 10,
         video_hlength =>  2112,
-        video_vlength => 1248,
+        video_vlength => 2496,
         video_hsync_pol => true,
         video_hsync_len => 8,
         video_hbp_len => 8,
-        video_h_visible => 1920,
+        video_h_visible => 1080,
         video_vsync_pol => true,
         video_vsync_len => 8,
         video_vbp_len => 8,
-        video_v_visible => 1080,
+        video_v_visible => 1920,
         pixels_per_clock => 2,
-        generate_idelayctrl => true)
+        generate_idelayctrl => false)
       port map(
         ref_clock_in => sys_clock,
         pixel_clock_in => cam_pixel_clock,
@@ -489,6 +491,27 @@ begin
         video_odd_line => camr_odd_line,
         video_data => camr_data,
         video_prev_line_data => camr_prev_line_data);
+
+  --Camera postprocessing
+  isp : entity work.camera_isp_top
+    generic map(
+      line_width => 1080,
+      frame_height => 1920)
+    port map(
+      pixel_clock => cam_pixel_clock,
+      input_hsync => camr_hsync,
+      input_vsync => camr_vsync,
+      input_den => camr_den,
+      input_line_start => camr_line_start,
+      input_odd_line => camr_odd_line,
+      input_prev_line_data => camr_prev_line_data,
+      output_hsync => ispr_hsync,
+      output_vsync => ispr_vsync,
+      output_den => ispr_den,
+      output_line_start => ispr_line_start,
+      output_pixel_x => ispr_x,
+      output_data_even => ispr_data_even,
+      output_data_odd => ispr_data_odd);
 
   --Assign default values to some unused IO ports
 
