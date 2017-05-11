@@ -237,6 +237,22 @@ begin
         I => clock_p,
         IB => clock_n);
 
+  spll : sys_pll
+    port map(
+      clkin => sys_clock,
+      clock_50 => clock_50
+    );
+
+  btnin : entity work.button_input
+    port map(
+      clock_in => clock_50,
+      sck => btn_clk,
+      le_n => btn_ld_n,
+      miso => btn_miso,
+      buttons => buttons
+    );
+
+
   --Test pattern generator
   pattern_sel <= buttons(5 downto 4);
 
