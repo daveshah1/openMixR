@@ -34,7 +34,7 @@ entity openmixr_top is
     ftdi_wr_n : out std_logic;
     ftdi_siwu_n : out std_logic;
     ftdi_rxf_n : in std_logic;
-    ftdi_txf_n : in std_logic;
+    ftdi_txe_n : in std_logic;
 
     --USB-C and DP interface
     ccg_io0 : inout std_logic;
@@ -75,7 +75,7 @@ entity openmixr_top is
     vddd_en : out std_logic;
     vdda_en : out std_logic;
     lcd_reset_b : out std_logic;
-    bl_pwm_b : out std_logic;
+    bl_pwm : out std_logic;
     lcd_te : in std_logic;
     lcd_id : in std_logic_vector(3 downto 0);
     lcd_gpio : inout std_logic_vector(2 downto 0);
@@ -140,11 +140,11 @@ entity openmixr_top is
     ddr3_ras_n : out std_logic;
     ddr3_reset_n : out std_logic;
     ddr3_we_n : out std_logic;
-    ddr3_dq : inout std_logic_vector(31 downto 0);
-    ddr3_dqs_n : inout std_logic_vector(3 downto 0);
-    ddr3_dqs_p : inout std_logic_vector(3 downto 0);
+    ddr3_dq : inout std_logic_vector(15 downto 0);
+    ddr3_dqs_n : inout std_logic_vector(1 downto 0);
+    ddr3_dqs_p : inout std_logic_vector(1 downto 0);
     ddr3_cs_n : out std_logic_vector(0 downto 0);
-    ddr3_dm : out std_logic_vector(3 downto 0);
+    ddr3_dm : out std_logic_vector(1 downto 0);
     ddr3_odt : out std_logic_vector(0 downto 0)
   );
 end openmixr_top;
@@ -345,6 +345,8 @@ begin
       dphy1_hs_d3 => dphy1_hs_d3,
       dphy1_lp_d3 => dphy1_lp_d3
     );
+
+  bl_pwm <= pwm_en;
 
   --Cameras
   campll : camera_pll
