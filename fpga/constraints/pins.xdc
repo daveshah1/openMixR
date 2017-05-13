@@ -413,7 +413,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {ftdi_data[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports ftdi_rd_n]
 set_property IOSTANDARD LVCMOS33 [get_ports ftdi_rxf_n]
 set_property IOSTANDARD LVCMOS33 [get_ports ftdi_siwu_n]
-set_property IOSTANDARD LVCMOS33 [get_ports ftdi_txf_n]
 set_property IOSTANDARD LVCMOS33 [get_ports ftdi_wr_n]
 set_property IOSTANDARD LVCMOS33 [get_ports imu_cs_n]
 set_property IOSTANDARD LVCMOS33 [get_ports imu_fsync]
@@ -508,3 +507,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports {rgb_led[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {rgb_led[2]}]
 set_property PACKAGE_PIN K14 [get_ports vdda_en]
 set_property PACKAGE_PIN H15 [get_ports vddd_en]
+
+set_property IOSTANDARD LVCMOS33 [get_ports vdda_en]
+set_property IOSTANDARD LVCMOS33 [get_ports vddd_en]
+
+
+create_clock -period 5.000 -name sysclk -waveform {0.000 2.500} [get_ports clock_p]
