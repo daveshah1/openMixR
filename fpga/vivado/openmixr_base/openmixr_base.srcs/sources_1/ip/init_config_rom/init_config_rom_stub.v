@@ -1,7 +1,7 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-// Date        : Thu May  4 16:19:46 2017
+// Date        : Tue May 23 16:06:12 2017
 // Host        : david-desktop-arch running 64-bit unknown
 // Command     : write_verilog -force -mode synth_stub
 //               /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/init_config_rom/init_config_rom_stub.v

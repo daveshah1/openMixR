@@ -66,6 +66,6 @@ begin
 
   buttons <= buttons_int;
 
-  sck <='1' when div_ctr >= div_factor else '0';
-  le_n <= '0' when ctr = 7 else '0';
+  sck <='1' when div_ctr >= div_factor / 2 else '0';
+  le_n <= '0' when ctr = 7 else '1';
 end Behavioral;

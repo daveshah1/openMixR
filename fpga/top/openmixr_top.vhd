@@ -223,7 +223,7 @@ architecture Behavioral of openmixr_top is
 
 begin
   --System core
-  global_reset <= buttons(0) and buttons(3);
+  global_reset <= buttons(7);
 
   rgb_led(2) <= not init_done;
   rgb_led(1) <= init_done;
