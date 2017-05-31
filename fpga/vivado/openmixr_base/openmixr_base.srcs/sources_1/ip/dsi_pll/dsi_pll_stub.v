@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-// Date        : Thu May 11 16:45:14 2017
+// Date        : Sun May 28 15:38:00 2017
 // Host        : david-desktop-arch running 64-bit unknown
-// Command     : write_verilog -force -mode synth_stub
-//               /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top dsi_pll -prefix
+//               dsi_pll_ dsi_pll_stub.v
 // Design      : dsi_pll
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a200tfbg484-3

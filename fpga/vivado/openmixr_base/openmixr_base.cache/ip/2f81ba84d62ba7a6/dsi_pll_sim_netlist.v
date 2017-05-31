@@ -3,8 +3,8 @@
 // Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
 // Date        : Sun May 28 15:38:00 2017
 // Host        : david-desktop-arch running 64-bit unknown
-// Command     : write_verilog -force -mode funcsim -rename_top dsi_pll -prefix
-//               dsi_pll_ dsi_pll_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+//               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ dsi_pll_sim_netlist.v
 // Design      : dsi_pll
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -13,7 +13,7 @@
 `timescale 1 ps / 1 ps
 
 (* NotValidForBitStream *)
-module dsi_pll
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
    (hs_word_clock,
     hs_bit_clock,
     hs_out_clock,
@@ -31,7 +31,7 @@ module dsi_pll
   wire hs_word_clock;
   wire ls_2xbit_clock;
 
-  dsi_pll_dsi_pll_clk_wiz inst
+  decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_dsi_pll_clk_wiz inst
        (.clkin(clkin),
         .hs_bit_clock(hs_bit_clock),
         .hs_out_clock(hs_out_clock),
@@ -39,7 +39,7 @@ module dsi_pll
         .ls_2xbit_clock(ls_2xbit_clock));
 endmodule
 
-module dsi_pll_dsi_pll_clk_wiz
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_dsi_pll_clk_wiz
    (hs_word_clock,
     hs_bit_clock,
     hs_out_clock,

@@ -44,12 +44,13 @@ proc step_failed { step } {
 
 set_msg_config -id {HDL 9-1061} -limit 100000
 set_msg_config -id {HDL 9-1654} -limit 100000
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 
 start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param xicom.use_bs_reader 1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
   set_property webtalk.parent_dir /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.cache/wt [current_project]
@@ -58,18 +59,22 @@ set rc [catch {
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
   add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.runs/synth_1/openmixr_top.dcp
+  add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.dcp
+  set_property netlist_only true [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.dcp]
   add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/init_config_rom/init_config_rom.dcp
   set_property netlist_only true [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/init_config_rom/init_config_rom.dcp]
   add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/sys_pll/sys_pll.dcp
   set_property netlist_only true [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/sys_pll/sys_pll.dcp]
   add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_pll/video_pll.dcp
   set_property netlist_only true [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_pll/video_pll.dcp]
-  add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.dcp
-  set_property netlist_only true [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.dcp]
   add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/camera_pll/camera_pll.dcp
   set_property netlist_only true [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/camera_pll/camera_pll.dcp]
   add_files -quiet /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_data_fifo/video_data_fifo.dcp
   set_property netlist_only true [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_data_fifo/video_data_fifo.dcp]
+  read_xdc -prop_thru_buffers -ref dsi_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_board.xdc
+  set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_board.xdc]
+  read_xdc -ref dsi_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.xdc
+  set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.xdc]
   read_xdc -mode out_of_context -ref init_config_rom -cells U0 /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/init_config_rom/init_config_rom_ooc.xdc
   set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/init_config_rom/init_config_rom_ooc.xdc]
   read_xdc -mode out_of_context -ref sys_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/sys_pll/sys_pll_ooc.xdc
@@ -84,12 +89,6 @@ set rc [catch {
   set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_pll/video_pll_board.xdc]
   read_xdc -ref video_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_pll/video_pll.xdc
   set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_pll/video_pll.xdc]
-  read_xdc -mode out_of_context -ref dsi_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_ooc.xdc
-  set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_ooc.xdc]
-  read_xdc -prop_thru_buffers -ref dsi_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_board.xdc
-  set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_board.xdc]
-  read_xdc -ref dsi_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.xdc
-  set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll.xdc]
   read_xdc -mode out_of_context -ref camera_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/camera_pll/camera_pll_ooc.xdc
   set_property processing_order EARLY [get_files /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/camera_pll/camera_pll_ooc.xdc]
   read_xdc -prop_thru_buffers -ref camera_pll -cells inst /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/camera_pll/camera_pll_board.xdc

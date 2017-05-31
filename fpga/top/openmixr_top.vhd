@@ -220,7 +220,7 @@ architecture Behavioral of openmixr_top is
   signal buttons : std_logic_vector(7 downto 0) := (others => '0');
 
   signal init_done : std_logic;
-
+  signal te_toggle : std_logic := '0';
 begin
   --System core
   global_reset <= buttons(7);
@@ -228,6 +228,15 @@ begin
   rgb_led(2) <= not init_done;
   rgb_led(1) <= init_done;
   rgb_led(0) <= lcd_te;
+
+  --LCD debug begin
+  -- process(lcd_te)
+  -- begin
+  --   if rising_edge(lcd_te) then
+  --     te_toggle <= not te_toggle;
+  --   end if;
+  -- end process;
+  --LCD debug end
 
   clkbuf : IBUFGDS
     generic map(
