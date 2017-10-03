@@ -56,10 +56,10 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// hs_word_clock____25.000______0.000______50.0______180.172____105.461
-// hs_bit_clock___100.000______0.000______50.0______136.686____105.461
-// hs_out_clock___100.000_____90.000______50.0______136.686____105.461
-// ls_2xbit_clock____15.000______0.000______50.0______198.894____105.461
+// hs_word_clock____30.000______0.000______50.0______228.043____196.976
+// hs_bit_clock___120.000______0.000______50.0______171.432____196.976
+// hs_out_clock___120.000_____90.000______50.0______171.432____196.976
+// ls_2xbit_clock____15.000______0.000______50.0______259.039____196.976
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -68,7 +68,7 @@
 
 `timescale 1ps/1ps
 
-(* CORE_GENERATION_INFO = "dsi_pll,clk_wiz_v5_3_2_0,{component_name=dsi_pll,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=PLL,num_out_clk=4,clkin1_period=5.0,clkin2_period=10.0,use_power_down=false,use_reset=false,use_locked=false,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
+(* CORE_GENERATION_INFO = "dsi_pll,clk_wiz_v5_3_2_0,{component_name=dsi_pll,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=4,clkin1_period=5.0,clkin2_period=10.0,use_power_down=false,use_reset=false,use_locked=false,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
 
 module dsi_pll 
  (

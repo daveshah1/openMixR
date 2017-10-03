@@ -309,7 +309,7 @@ begin
   dsidrv : entity work.dsi_tx_dual_dsi_top
     generic map(
       command_mode => true,
-      vsync_to_first_cmd => 8160,
+      vsync_to_first_cmd => 9500,
       hsync_to_cmd => 1,
       line_width => 1080,
       frame_height => 1920)

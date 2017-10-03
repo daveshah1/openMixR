@@ -516,8 +516,6 @@ create_clock -period 5.000 -name sysclk -waveform {0.000 2.500} [get_ports clock
 
 
 
-set_output_delay -clock [get_clocks [get_clocks -of_objects [get_pins dsipll/inst/plle2_adv_inst/CLKOUT1]]] 0.200 [get_ports {{dphy0_hs_clk[0]} {dphy0_hs_clk[1]} {dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]} {dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]} {dphy1_hs_clk[0]} {dphy1_hs_clk[1]}}]
-set_output_delay -clock [get_clocks [get_clocks -of_objects [get_pins dsipll/inst/plle2_adv_inst/CLKOUT1]]] -clock_fall 0.200 [get_ports {{dphy0_hs_clk[0]} {dphy0_hs_clk[1]} {dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]} {dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]} {dphy1_hs_clk[0]} {dphy1_hs_clk[1]}}]
 
 
 
@@ -562,3 +560,17 @@ set_property SLEW FAST [get_ports {dphy1_lp_d2[1]}]
 set_property SLEW FAST [get_ports {dphy1_lp_d3[0]}]
 set_property SLEW FAST [get_ports {dphy1_lp_d3[1]}]
 set_property IOSTANDARD DIFF_SSTL18_II [get_ports {dphy1_hs_clk[1]}]
+
+set_property IOSTANDARD DIFF_SSTL18_II [get_ports {dphy0_hs_clk[1]}]
+
+create_generated_clock -name dsi0_clock -divide_by 1 -source [get_pins dsidrv/left_dsi/hs_lp_clock_phy/clk_drv/C] [get_ports dphy0_hs_clk]
+set_output_delay -clock dsi0_clock -max 1.500 [get_ports {{dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]} }]
+set_output_delay -clock dsi0_clock -clock_fall -max 1.500 [get_ports {{dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]} }]
+set_output_delay -clock dsi0_clock -min 1.000 [get_ports {{dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]} }]
+set_output_delay -clock dsi0_clock -clock_fall -min 1.000 [get_ports {{dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]}}]
+
+create_generated_clock -name dsi1_clock -divide_by 1 -source [get_pins dsidrv/right_dsi/hs_lp_clock_phy/clk_drv/C] [get_ports dphy1_hs_clk]
+set_output_delay -clock dsi1_clock -max 1.500 [get_ports {{dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]}}]
+set_output_delay -clock dsi1_clock -clock_fall -max 1.500 [get_ports { {dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]}}]
+set_output_delay -clock dsi1_clock -min 1.000 [get_ports { {dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]}}]
+set_output_delay -clock dsi1_clock -clock_fall -min 1.000 [get_ports { {dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]}}]

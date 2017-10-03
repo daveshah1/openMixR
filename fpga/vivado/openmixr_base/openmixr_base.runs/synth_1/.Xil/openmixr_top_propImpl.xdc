@@ -381,7 +381,3 @@ set_property src_info {type:XDC file:1 line:508 export:INPUT save:INPUT read:REA
 set_property PACKAGE_PIN K14 [get_ports vdda_en]
 set_property src_info {type:XDC file:1 line:509 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN H15 [get_ports vddd_en]
-set_property src_info {type:XDC file:1 line:519 export:INPUT save:INPUT read:READ} [current_design]
-set_output_delay -clock [get_clocks [get_clocks -of_objects [get_pins dsipll/inst/plle2_adv_inst/CLKOUT1]]] 0.200 [get_ports {{dphy0_hs_clk[0]} {dphy0_hs_clk[1]} {dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]} {dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]} {dphy1_hs_clk[0]} {dphy1_hs_clk[1]}}]
-set_property src_info {type:XDC file:1 line:520 export:INPUT save:INPUT read:READ} [current_design]
-set_output_delay -clock [get_clocks [get_clocks -of_objects [get_pins dsipll/inst/plle2_adv_inst/CLKOUT1]]] -clock_fall 0.200 [get_ports {{dphy0_hs_clk[0]} {dphy0_hs_clk[1]} {dphy0_hs_d0[0]} {dphy0_hs_d0[1]} {dphy0_hs_d1[0]} {dphy0_hs_d1[1]} {dphy0_hs_d2[0]} {dphy0_hs_d2[1]} {dphy0_hs_d3[0]} {dphy0_hs_d3[1]} {dphy1_hs_d0[0]} {dphy1_hs_d0[1]} {dphy1_hs_d1[0]} {dphy1_hs_d1[1]} {dphy1_hs_d2[0]} {dphy1_hs_d2[1]} {dphy1_hs_d3[0]} {dphy1_hs_d3[1]} {dphy1_hs_clk[0]} {dphy1_hs_clk[1]}}]

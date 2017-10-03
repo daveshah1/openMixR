@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-// Date        : Mon Oct  2 16:51:55 2017
+// Date        : Thu Jun  1 16:08:56 2017
 // Host        : david-desktop-arch running 64-bit unknown
-// Command     : write_verilog -force -mode funcsim
-//               /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+//               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ dsi_pll_sim_netlist.v
 // Design      : dsi_pll
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -13,7 +13,7 @@
 `timescale 1 ps / 1 ps
 
 (* NotValidForBitStream *)
-module dsi_pll
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
    (hs_word_clock,
     hs_bit_clock,
     hs_out_clock,
@@ -31,7 +31,7 @@ module dsi_pll
   wire hs_word_clock;
   wire ls_2xbit_clock;
 
-  dsi_pll_dsi_pll_clk_wiz inst
+  decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_dsi_pll_clk_wiz inst
        (.clkin(clkin),
         .hs_bit_clock(hs_bit_clock),
         .hs_out_clock(hs_out_clock),
@@ -39,8 +39,7 @@ module dsi_pll
         .ls_2xbit_clock(ls_2xbit_clock));
 endmodule
 
-(* ORIG_REF_NAME = "dsi_pll_clk_wiz" *) 
-module dsi_pll_dsi_pll_clk_wiz
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_dsi_pll_clk_wiz
    (hs_word_clock,
     hs_bit_clock,
     hs_out_clock,
@@ -64,20 +63,11 @@ module dsi_pll_dsi_pll_clk_wiz
   wire hs_word_clock_dsi_pll;
   wire ls_2xbit_clock;
   wire ls_2xbit_clock_dsi_pll;
-  wire NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKOUT2B_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKOUT3B_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKOUT4_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKOUT5_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_CLKOUT6_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_DRDY_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_LOCKED_UNCONNECTED;
-  wire NLW_mmcm_adv_inst_PSDONE_UNCONNECTED;
-  wire [15:0]NLW_mmcm_adv_inst_DO_UNCONNECTED;
+  wire NLW_plle2_adv_inst_CLKOUT4_UNCONNECTED;
+  wire NLW_plle2_adv_inst_CLKOUT5_UNCONNECTED;
+  wire NLW_plle2_adv_inst_DRDY_UNCONNECTED;
+  wire NLW_plle2_adv_inst_LOCKED_UNCONNECTED;
+  wire [15:0]NLW_plle2_adv_inst_DO_UNCONNECTED;
 
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFG clkf_buf
@@ -104,87 +94,58 @@ module dsi_pll_dsi_pll_clk_wiz
        (.I(ls_2xbit_clock_dsi_pll),
         .O(ls_2xbit_clock));
   (* BOX_TYPE = "PRIMITIVE" *) 
-  MMCME2_ADV #(
+  PLLE2_ADV #(
     .BANDWIDTH("OPTIMIZED"),
-    .CLKFBOUT_MULT_F(24.000000),
+    .CLKFBOUT_MULT(21),
     .CLKFBOUT_PHASE(0.000000),
-    .CLKFBOUT_USE_FINE_PS("FALSE"),
     .CLKIN1_PERIOD(5.000000),
     .CLKIN2_PERIOD(0.000000),
-    .CLKOUT0_DIVIDE_F(32.000000),
+    .CLKOUT0_DIVIDE(28),
     .CLKOUT0_DUTY_CYCLE(0.500000),
     .CLKOUT0_PHASE(0.000000),
-    .CLKOUT0_USE_FINE_PS("FALSE"),
-    .CLKOUT1_DIVIDE(8),
+    .CLKOUT1_DIVIDE(7),
     .CLKOUT1_DUTY_CYCLE(0.500000),
     .CLKOUT1_PHASE(0.000000),
-    .CLKOUT1_USE_FINE_PS("FALSE"),
-    .CLKOUT2_DIVIDE(8),
+    .CLKOUT2_DIVIDE(7),
     .CLKOUT2_DUTY_CYCLE(0.500000),
     .CLKOUT2_PHASE(90.000000),
-    .CLKOUT2_USE_FINE_PS("FALSE"),
-    .CLKOUT3_DIVIDE(64),
+    .CLKOUT3_DIVIDE(56),
     .CLKOUT3_DUTY_CYCLE(0.500000),
     .CLKOUT3_PHASE(0.000000),
-    .CLKOUT3_USE_FINE_PS("FALSE"),
-    .CLKOUT4_CASCADE("FALSE"),
     .CLKOUT4_DIVIDE(1),
     .CLKOUT4_DUTY_CYCLE(0.500000),
     .CLKOUT4_PHASE(0.000000),
-    .CLKOUT4_USE_FINE_PS("FALSE"),
     .CLKOUT5_DIVIDE(1),
     .CLKOUT5_DUTY_CYCLE(0.500000),
     .CLKOUT5_PHASE(0.000000),
-    .CLKOUT5_USE_FINE_PS("FALSE"),
-    .CLKOUT6_DIVIDE(1),
-    .CLKOUT6_DUTY_CYCLE(0.500000),
-    .CLKOUT6_PHASE(0.000000),
-    .CLKOUT6_USE_FINE_PS("FALSE"),
     .COMPENSATION("BUF_IN"),
     .DIVCLK_DIVIDE(5),
     .IS_CLKINSEL_INVERTED(1'b0),
-    .IS_PSEN_INVERTED(1'b0),
-    .IS_PSINCDEC_INVERTED(1'b0),
     .IS_PWRDWN_INVERTED(1'b0),
     .IS_RST_INVERTED(1'b0),
     .REF_JITTER1(0.010000),
     .REF_JITTER2(0.010000),
-    .SS_EN("FALSE"),
-    .SS_MODE("CENTER_HIGH"),
-    .SS_MOD_PERIOD(10000),
     .STARTUP_WAIT("FALSE")) 
-    mmcm_adv_inst
+    plle2_adv_inst
        (.CLKFBIN(clkfbout_buf_dsi_pll),
         .CLKFBOUT(clkfbout_dsi_pll),
-        .CLKFBOUTB(NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED),
-        .CLKFBSTOPPED(NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED),
         .CLKIN1(clkin_dsi_pll),
         .CLKIN2(1'b0),
         .CLKINSEL(1'b1),
-        .CLKINSTOPPED(NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED),
         .CLKOUT0(hs_word_clock_dsi_pll),
-        .CLKOUT0B(NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED),
         .CLKOUT1(hs_bit_clock_dsi_pll),
-        .CLKOUT1B(NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED),
         .CLKOUT2(hs_out_clock_dsi_pll),
-        .CLKOUT2B(NLW_mmcm_adv_inst_CLKOUT2B_UNCONNECTED),
         .CLKOUT3(ls_2xbit_clock_dsi_pll),
-        .CLKOUT3B(NLW_mmcm_adv_inst_CLKOUT3B_UNCONNECTED),
-        .CLKOUT4(NLW_mmcm_adv_inst_CLKOUT4_UNCONNECTED),
-        .CLKOUT5(NLW_mmcm_adv_inst_CLKOUT5_UNCONNECTED),
-        .CLKOUT6(NLW_mmcm_adv_inst_CLKOUT6_UNCONNECTED),
+        .CLKOUT4(NLW_plle2_adv_inst_CLKOUT4_UNCONNECTED),
+        .CLKOUT5(NLW_plle2_adv_inst_CLKOUT5_UNCONNECTED),
         .DADDR({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .DCLK(1'b0),
         .DEN(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .DO(NLW_mmcm_adv_inst_DO_UNCONNECTED[15:0]),
-        .DRDY(NLW_mmcm_adv_inst_DRDY_UNCONNECTED),
+        .DO(NLW_plle2_adv_inst_DO_UNCONNECTED[15:0]),
+        .DRDY(NLW_plle2_adv_inst_DRDY_UNCONNECTED),
         .DWE(1'b0),
-        .LOCKED(NLW_mmcm_adv_inst_LOCKED_UNCONNECTED),
-        .PSCLK(1'b0),
-        .PSDONE(NLW_mmcm_adv_inst_PSDONE_UNCONNECTED),
-        .PSEN(1'b0),
-        .PSINCDEC(1'b0),
+        .LOCKED(NLW_plle2_adv_inst_LOCKED_UNCONNECTED),
         .PWRDWN(1'b0),
         .RST(1'b0));
 endmodule

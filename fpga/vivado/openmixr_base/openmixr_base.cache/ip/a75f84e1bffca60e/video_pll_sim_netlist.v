@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-// Date        : Mon Oct  2 16:52:23 2017
+// Date        : Thu Jun  1 15:44:49 2017
 // Host        : david-desktop-arch running 64-bit unknown
-// Command     : write_verilog -force -mode funcsim
-//               /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/video_pll/video_pll_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+//               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ video_pll_sim_netlist.v
 // Design      : video_pll
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -13,7 +13,7 @@
 `timescale 1 ps / 1 ps
 
 (* NotValidForBitStream *)
-module video_pll
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
    (pixel_clock,
     clkin);
   output pixel_clock;
@@ -22,13 +22,12 @@ module video_pll
   wire clkin;
   wire pixel_clock;
 
-  video_pll_video_pll_clk_wiz inst
+  decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_video_pll_clk_wiz inst
        (.clkin(clkin),
         .pixel_clock(pixel_clock));
 endmodule
 
-(* ORIG_REF_NAME = "video_pll_clk_wiz" *) 
-module video_pll_video_pll_clk_wiz
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_video_pll_clk_wiz
    (pixel_clock,
     clkin);
   output pixel_clock;
@@ -73,12 +72,12 @@ module video_pll_video_pll_clk_wiz
   (* BOX_TYPE = "PRIMITIVE" *) 
   MMCME2_ADV #(
     .BANDWIDTH("OPTIMIZED"),
-    .CLKFBOUT_MULT_F(55.750000),
+    .CLKFBOUT_MULT_F(25.125000),
     .CLKFBOUT_PHASE(0.000000),
     .CLKFBOUT_USE_FINE_PS("FALSE"),
     .CLKIN1_PERIOD(5.000000),
     .CLKIN2_PERIOD(0.000000),
-    .CLKOUT0_DIVIDE_F(14.125000),
+    .CLKOUT0_DIVIDE_F(8.375000),
     .CLKOUT0_DUTY_CYCLE(0.500000),
     .CLKOUT0_PHASE(0.000000),
     .CLKOUT0_USE_FINE_PS("FALSE"),
@@ -108,7 +107,7 @@ module video_pll_video_pll_clk_wiz
     .CLKOUT6_PHASE(0.000000),
     .CLKOUT6_USE_FINE_PS("FALSE"),
     .COMPENSATION("BUF_IN"),
-    .DIVCLK_DIVIDE(11),
+    .DIVCLK_DIVIDE(5),
     .IS_CLKINSEL_INVERTED(1'b0),
     .IS_PSEN_INVERTED(1'b0),
     .IS_PSINCDEC_INVERTED(1'b0),
