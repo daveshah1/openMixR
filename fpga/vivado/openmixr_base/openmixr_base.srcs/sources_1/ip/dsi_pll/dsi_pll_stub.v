@@ -1,7 +1,7 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-// Date        : Mon Oct  2 16:51:55 2017
+// Date        : Sat Oct  7 12:27:25 2017
 // Host        : david-desktop-arch running 64-bit unknown
 // Command     : write_verilog -force -mode synth_stub
 //               /home/dave/openMixR/fpga/vivado/openmixr_base/openmixr_base.srcs/sources_1/ip/dsi_pll/dsi_pll_stub.v
